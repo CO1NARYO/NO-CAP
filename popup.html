@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NO CAP</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="wordmark">NO CAP</span>
+      <span class="tagline">Google Forms exam focus monitor</span>
+    </div>
+    <button id="openSettings" class="textbtn" type="button">Settings</button>
+  </header>
+
+  <main>
+    <section aria-labelledby="statusHead">
+      <h2 id="statusHead" class="sr">Exam status</h2>
+      <ol class="bubbles" id="bubbles">
+        <li data-state="not_started"><span class="bubble" aria-hidden="true"></span>Not Started</li>
+        <li data-state="in_progress"><span class="bubble" aria-hidden="true"></span>In Progress</li>
+        <li data-state="violation"><span class="bubble" aria-hidden="true"></span>Violation Detected</li>
+        <li data-state="ended"><span class="bubble" aria-hidden="true"></span>Exam Ended</li>
+      </ol>
+    </section>
+
+    <section id="warningPanel" class="panel warn" role="alert" hidden>
+      <h2 id="warnTitle">Incident recorded</h2>
+      <p id="warnMessage"></p>
+      <p class="small" id="warnMeta"></p>
+      <button id="returnBtn" class="btn primary" type="button">Return to exam page</button>
+    </section>
+
+    <section id="runPanel" class="panel" hidden>
+      <h2>Exam in progress</h2>
+      <p class="small">Monitoring is on. Tab, window-focus and page-visibility changes are being recorded on this device.</p>
+      <dl class="stats">
+        <div><dt>Incidents</dt><dd id="statCount">0</dd></div>
+        <div><dt>Elapsed</dt><dd id="statTime">00:00:00</dd></div>
+        <div><dt>Review flag</dt><dd id="statFlag">Off</dd></div>
+      </dl>
+      <div id="recent" class="recent"></div>
+      <button id="endBtn" class="btn danger" type="button">End Exam</button>
+    </section>
+
+    <section id="endedPanel" class="panel" hidden>
+      <h2>Exam ended</h2>
+      <p id="endedSummary" class="small"></p>
+    </section>
+
+    <section id="formPanel" class="panel">
+      <h2>Authorized exam form</h2>
+      <div id="savedRow" class="saved" hidden>
+        <span class="label">Saved link</span>
+        <code id="savedUrl"></code>
+      </div>
+      <div id="setupFields">
+        <label for="examUrl" class="label">Google Forms link</label>
+        <input id="examUrl" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://docs.google.com/forms/d/e/…/viewform">
+        <div class="row">
+          <button id="useTab" class="btn" type="button">Use current tab</button>
+          <button id="saveUrl" class="btn" type="button">Save link</button>
+        </div>
+        <p id="urlMsg" class="msg" role="status"></p>
+      </div>
+      <p class="small">Questions, answers and submission stay entirely with Google Forms. NO CAP never reads or changes them.</p>
+    </section>
+
+    <section id="rulesPanel" class="panel">
+      <h2>Examination rules</h2>
+      <ul class="rules">
+        <li>Stay on the authorized exam form. Other tabs, new tabs and other websites are recorded.</li>
+        <li>Leaving Chrome, minimizing it, or hiding the exam page is recorded.</li>
+        <li>AI sites such as ChatGPT, PDF tabs and local files opened in Chrome are recorded when Chrome lets the extension see them.</li>
+        <li>Each incident is saved with its time. Returning to the exam does not delete it.</li>
+        <li>Records stay on this device and support your instructor’s review. They are not proof of cheating.</li>
+        <li id="ruleDash" hidden></li>
+      </ul>
+      <label class="check"><input id="accept" type="checkbox"> I have read the rules and agree to be monitored during this exam.</label>
+      <button id="startBtn" class="btn primary" type="button" disabled>Start Exam</button>
+      <p id="startMsg" class="msg" role="status"></p>
+    </section>
+  </main>
+
+  <footer>
+    <button id="openLog" class="btn" type="button">Open session log</button>
+    <p id="logNote" class="small"></p>
+    <p id="dashStatus" class="small" role="status"></p>
+    <button id="connectBtn" class="textbtn" type="button">Connect to instructor dashboard</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

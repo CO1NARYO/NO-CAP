@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NO CAP settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header>
+    <h1>NO CAP settings</h1>
+    <p class="lead">Set these before the exam. They are locked once a session starts, and each session keeps the settings it started with.</p>
+  </header>
+
+  <p id="lockNote" class="banner" role="status" hidden>An exam is in progress, so settings are locked.</p>
+
+  <main>
+    <section id="dashSection">
+      <h2>Instructor dashboard (optional)</h2>
+      <p class="help">If your instructor uses a NO CAP dashboard, connect here so they can see incidents as they happen. Nothing is sent until you connect and agree below.</p>
+
+      <div id="dashConnected" hidden>
+        <p><strong id="dashTitle"></strong></p>
+        <p id="dashDetail" class="help"></p>
+        <p id="dashError" class="msg error" role="status"></p>
+        <p class="help">While connected, the exam form and rules come from your instructor, and your incident records (times, categories and website domains) are sent to <span id="dashOrigin"></span>. No page addresses, answers or form content are sent.</p>
+        <button id="dashDisconnect" class="btn danger" type="button">Disconnect</button>
+      </div>
+
+      <div id="dashForm">
+        <div class="field">
+          <label for="dServer">Dashboard address</label>
+          <input id="dServer" type="url" inputmode="url" placeholder="https://exams.myschool.edu" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="dCode">Join code</label>
+          <input id="dCode" type="text" maxlength="6" placeholder="ABC123" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="dName">Your name</label>
+          <input id="dName" type="text" maxlength="80" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="dStudentId">Student ID (optional)</label>
+          <input id="dStudentId" type="text" maxlength="40" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="check"><input id="dConsent" type="checkbox"> I agree that my name and my exam incident records (times, categories and website domains) are sent to my instructor’s dashboard at the address above.</label>
+        </div>
+        <button id="dashConnect" class="btn primary" type="button">Connect</button>
+        <p id="dashMsg" class="msg" role="status"></p>
+        <p class="help">Chrome will ask you to allow NO CAP to contact that address. Plain http:// works only for localhost and school network addresses.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Detection</h2>
+      <div class="field">
+        <label class="check"><input id="strict" type="checkbox"> Strict Mode</label>
+        <p class="help">Tries to close newly opened tabs and return the student to the exam tab. It is best effort only: a student can still bypass it (for example by using another browser), so it does not make cheating impossible.</p>
+      </div>
+      <div class="field">
+        <label for="grace">Focus-loss grace period (seconds)</label>
+        <input id="grace" type="number" min="0" max="30" step="1">
+        <p class="help">Chrome losing focus for less than this is ignored, which avoids false alarms from accidental clicks and system pop-ups. Set 0 to record every loss.</p>
+      </div>
+      <div class="field">
+        <label for="threshold">Flag for instructor review after (incidents)</label>
+        <input id="threshold" type="number" min="0" max="99" step="1">
+        <p class="help">The session is flagged for review when this many incidents are recorded. Set 0 to turn the flag off. A flag is not a finding of misconduct.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Prohibited websites</h2>
+      <p class="help">Checked against the domain of the tab the student is viewing. Subdomains match too. Only the domain is stored, never the full address.</p>
+      <ul id="prohibitedList" class="list"></ul>
+      <div class="add">
+        <label for="pDomain" class="sr">Domain</label>
+        <input id="pDomain" type="text" placeholder="example.com" autocomplete="off" spellcheck="false">
+        <label for="pCategory" class="sr">Category</label>
+        <input id="pCategory" type="text" placeholder="Category (for example, AI assistant)" maxlength="40" autocomplete="off">
+        <button id="addProhibited" class="btn" type="button">Add</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Allowed exceptions</h2>
+      <p class="help">Sites other than the exam form that are allowed during the exam. Google sign-in is allowed by default so forms that require login keep working. Other Google sites, including Docs, are not allowed just because they share the Google domain.</p>
+      <ul id="allowedList" class="list"></ul>
+      <div class="add">
+        <label for="aDomain" class="sr">Domain</label>
+        <input id="aDomain" type="text" placeholder="example.com" autocomplete="off" spellcheck="false">
+        <button id="addAllowed" class="btn" type="button">Add</button>
+      </div>
+    </section>
+
+    <div class="savebar">
+      <button id="save" class="btn primary" type="button">Save settings</button>
+      <span id="saveMsg" class="msg" role="status"></span>
+    </div>
+
+    <section>
+      <h2>Local data</h2>
+      <p class="help">Session logs live in this browser profile only. Nothing is uploaded. Logs are kept until you delete them here.</p>
+      <div class="row">
+        <a class="btn" href="review.html">Open session log</a>
+        <button id="wipeLogs" class="btn danger" type="button">Delete all session logs</button>
+        <button id="wipeAll" class="btn danger" type="button">Delete logs and restore defaults</button>
+      </div>
+      <p id="dataMsg" class="msg" role="status"></p>
+    </section>
+
+    <section>
+      <h2>What NO CAP does not do</h2>
+      <p class="help">It cannot see other applications, other devices, other browsers or other Chrome profiles, and it does not take screenshots, log keystrokes or read the form. Its records are supporting evidence, not tamper-proof proof. For stronger control, use a separately managed examination environment.</p>
+    </section>
+  </main>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

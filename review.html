@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NO CAP session log</title>
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>NO CAP session log</h1>
+      <p class="lead">Local review screen. Records exist only in this browser profile on this computer.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="options.html">Settings</a>
+    </div>
+  </header>
+
+  <p class="notice">These records are supporting evidence for an instructor’s review. They are not definitive proof of cheating, and they are not tamper-proof. “Not confirmed” means the extension saw a signal but cannot say what the student actually did.</p>
+
+  <div class="picker">
+    <label for="sessionSelect">Session</label>
+    <select id="sessionSelect"></select>
+    <button id="exportCsv" class="btn" type="button">Export CSV</button>
+    <button id="exportJson" class="btn" type="button">Export JSON</button>
+    <button id="print" class="btn" type="button">Print</button>
+  </div>
+
+  <main id="main" aria-live="polite"></main>
+
+  <script type="module" src="review.js"></script>
+</body>
+</html>

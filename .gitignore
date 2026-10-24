@@ -1,0 +1,33 @@
+# Dependencies and build output (none are used today; kept for future tooling)
+node_modules/
+dist/
+build/
+*.zip
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+
+# Test output
+coverage/
+
+# Dashboard database (contains student records)
+dashboard/data/
+
+# Exported session data (may contain student information)
+NC-*.csv
+NC-*.json
