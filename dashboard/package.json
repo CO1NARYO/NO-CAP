@@ -1,0 +1,19 @@
+{
+  "name": "no-cap-dashboard",
+  "version": "2.0.0",
+  "description": "Hosted teacher dashboard for the NO CAP Chrome extension (Vercel + Postgres).",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "dev": "node local.js",
+    "sync-shared": "node scripts/sync-shared.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0"
+  }
+}
